@@ -1,16 +1,9 @@
-# animatedbb
+# Animated Bottom Bar Example
 
-A new Flutter project.
+Custom Scaffold with both animated bottom navigation bar and floating action button
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Screenshots
+<p float="left">  
+  <img src="https://github.com/Vasseurr/AnimatedBottomBar/assets/67058617/d079e04a-fb6b-4495-aa36-f11ff2f5305b" width="350" height="600">
+  <img src="https://github.com/Vasseurr/AnimatedBottomBar/assets/67058617/5fc7ba7d-972d-4c38-aa9d-d8d5133bff7e" width="350" height="600">
+</p>
