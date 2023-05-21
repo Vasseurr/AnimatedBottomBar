@@ -23,7 +23,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final HomeController _homeController = Get.put(HomeController());
     return CustomScaffold(
-      type: 1,
       body: Obx(() => IndexedStack(
             index: _homeController.tabIndex,
             children: [

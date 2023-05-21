@@ -9,9 +9,7 @@ import '../../controller/home_controller.dart';
 
 class CustomScaffold extends StatefulWidget {
   Widget body;
-  int type;
-  CustomScaffold({Key? key, required this.type, required this.body})
-      : super(key: key);
+  CustomScaffold({Key? key, required this.body}) : super(key: key);
 
   @override
   _CustomScaffoldState createState() => _CustomScaffoldState();
@@ -24,9 +22,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: appBar(context),
-        floatingActionButton: widget.type == 1
-            ? SpecialFABButton(type: 1)
-            : SpecialFABButton(type: 2),
+        floatingActionButton: SpecialFABButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         bottomNavigationBar: AnimatedBottomNavigationBar(
           backgroundColor: Colors.blue.shade900,
@@ -38,9 +34,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           gapLocation: GapLocation.end,
           notchSmoothness: NotchSmoothness.defaultEdge,
           onTap: (index) {
-            setState(() {
-              _homeController.tabIndex = index;
-            });
+            _homeController.tabIndex = index;
           },
         ),
         body: widget.body);
@@ -56,12 +50,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
       ),
       actions: [
         InkWell(
-            onTap: () {
-              if (widget.type == 1) {
-              } else {
-                Get.back();
-              }
-            },
+            onTap: () {},
             child: Icon(
               Icons.format_align_right,
               color: Colors.blue[900],

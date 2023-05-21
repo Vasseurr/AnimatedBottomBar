@@ -1,13 +1,17 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_final_fields, must_be_immutable
 
+import 'dart:developer';
+
+import 'package:animatedbb/view/notification_page.dart';
+import 'package:animatedbb/view/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/home_controller.dart';
+import '../mail.dart';
 
 class SpecialFABButton extends StatefulWidget {
-  int type;
-  SpecialFABButton({Key? key, required this.type}) : super(key: key);
+  const SpecialFABButton({Key? key}) : super(key: key);
 
   @override
   _SpecialFABButtonState createState() => _SpecialFABButtonState();
@@ -36,7 +40,7 @@ class _SpecialFABButtonState extends State<SpecialFABButton>
       parent: _animationController,
       curve: Interval(
         0.00,
-        1.00,
+        0.75,
         curve: _curve,
       ),
     ));
@@ -55,62 +59,86 @@ class _SpecialFABButtonState extends State<SpecialFABButton>
       children: [
         Transform(
             transform: Matrix4.translationValues(
-                0.0, -_translateButton.value * 3.6, 0.0),
+                0.0, -_translateButton.value * 3.6, -50.0),
             child: notificationButton()),
         Transform(
             transform: Matrix4.translationValues(
-                0.0, -_translateButton.value * 2.4, 0.0),
+                0.0, -_translateButton.value * 2.4, -50.0),
             child: mailButton()),
         Transform(
             transform: Matrix4.translationValues(
-                0.0, -_translateButton.value * 1.2, 0.0),
+                0.0, -_translateButton.value * 1.2, -50.0),
             child: profileButton()),
         mainFAB(context),
       ],
     );
   }
 
-  FloatingActionButton notificationButton() => FloatingActionButton(
+  Widget notificationButton() => FloatingActionButton(
       heroTag: "Notifications",
-      onPressed: null,
+      onPressed: () {
+        log("Notifications");
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NotificationPage(),
+            ));
+      },
       backgroundColor: Colors.blue.shade900,
       child: Icon(Icons.notification_add, size: 40));
 
   FloatingActionButton mailButton() => FloatingActionButton(
         heroTag: "Mail",
-        onPressed: null,
+        onPressed: () {
+          log("Mail");
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MailPage(),
+              ));
+        },
         backgroundColor: Colors.blue.shade900,
         child: Icon(Icons.mail, size: 40),
       );
 
   FloatingActionButton profileButton() => FloatingActionButton(
         heroTag: "Profile",
-        onPressed: () {},
+        onPressed: () {
+          log("Profile");
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfilePage(),
+              ));
+        },
         backgroundColor: Colors.blue.shade900,
         child: Icon(Icons.person, size: 40),
       );
 
-  mainFAB(BuildContext context) {
+  FloatingActionButton mainFAB(BuildContext context) {
     return FloatingActionButton(
         onPressed: animate,
-        backgroundColor: widget.type == 1
-            ? _homeController.mainFabIsClosed == true
-                ? Colors.blue.shade900
-                : Colors.red
-            : _homeController.otherFabIsClosed == true
+        backgroundColor: /*widget.type == 1
+            ? */
+            _homeController.mainFabIsClosed == true
                 ? Colors.blue.shade900
                 : Colors.red,
-        child: widget.type == 1
-            ? _homeController.mainFabIsClosed == true
+        /* : _homeController.otherFabIsClosed == true
+                ? Colors.blue.shade900
+                : Colors.red,*/
+        child: /* widget.type == 1
+            ?*/
+            _homeController.mainFabIsClosed == true
                 ? mainFabIcon
                 : Icon(Icons.close)
-            : _homeController.otherFabIsClosed == true
+        /* : _homeController.otherFabIsClosed == true
                 ? mainFabIcon
-                : Icon(Icons.close));
+                : Icon(Icons.close)*/
+        );
   }
 
   void animate() {
-    if (widget.type == 1) {
+    /*if (widget.type == 1) {
       if (_homeController.mainFabIsClosed) {
         print("Opening");
         _animationController.forward();
@@ -126,8 +154,16 @@ class _SpecialFABButtonState extends State<SpecialFABButton>
       } else {
         print("Closing");
         _animationController.reverse();
-      }
-      _homeController.otherFabIsClosed = !_homeController.otherFabIsClosed;
+      }*/
+    if (_homeController.mainFabIsClosed) {
+      print("Opening");
+      _animationController.forward();
+    } else {
+      print("Closing");
+      _animationController.reverse();
     }
+    _homeController.mainFabIsClosed = !_homeController.mainFabIsClosed;
+    _homeController.otherFabIsClosed = !_homeController.otherFabIsClosed;
+    // }
   }
 }
