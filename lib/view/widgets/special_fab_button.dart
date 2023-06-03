@@ -34,8 +34,10 @@ class _SpecialFABButtonState extends State<SpecialFABButton>
             setState(() {});
           });
     _translateButton = Tween<double>(
-      begin: 0,
-      end: _fabHeight,
+      /* begin: 0,
+      end: _fabHeight,*/
+      begin: _fabHeight,
+      end: -14.0,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Interval(
@@ -55,23 +57,45 @@ class _SpecialFABButtonState extends State<SpecialFABButton>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Padding(
+      padding: EdgeInsets.only(bottom: context.height * .02),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Transform(
+              transform: Matrix4.translationValues(
+                  0.0, _translateButton.value * 3.0, 0),
+              child: notificationButton()),
+          Transform(
+              transform:
+                  Matrix4.translationValues(0.0, _translateButton.value * 2, 0),
+              child: mailButton()),
+          Transform(
+              transform:
+                  Matrix4.translationValues(0.0, _translateButton.value, 0),
+              child: profileButton()),
+          mainFAB(context),
+        ],
+      ),
+    );
+    /*Stack(
       children: [
         Transform(
             transform: Matrix4.translationValues(
-                0.0, -_translateButton.value * 3.6, -50.0),
+                0.0, -_translateButton.value * 3.6, 0.0),
             child: notificationButton()),
         Transform(
             transform: Matrix4.translationValues(
-                0.0, -_translateButton.value * 2.4, -50.0),
+                0.0, -_translateButton.value * 2.4, 0.0),
             child: mailButton()),
         Transform(
             transform: Matrix4.translationValues(
-                0.0, -_translateButton.value * 1.2, -50.0),
+                0.0, -_translateButton.value * 1.2, 0.0),
             child: profileButton()),
         mainFAB(context),
       ],
-    );
+    );*/
   }
 
   Widget notificationButton() => FloatingActionButton(

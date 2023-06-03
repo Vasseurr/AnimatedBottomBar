@@ -12,6 +12,6 @@ class MailPage extends StatefulWidget {
 class _MailPageState extends State<MailPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Mail Page"));
+    return Scaffold(body: Center(child: Text("Mail Page")));
   }
 }
